@@ -1,0 +1,9 @@
+- name: add user to sudoers.d
+  lineinfile:
+    path: '/etc/sudoers.d/{{ ubuntu_user }}'
+    state: present
+    create: yes
+    regexp: '{{ ubuntu_user }} .*'
+    line: '{{ ubuntu_user }} ALL=(ALL) NOPASSWD:ALL'
+    
+    #-e ubuntu_user 
