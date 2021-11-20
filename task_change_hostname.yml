@@ -9,9 +9,9 @@
       lineinfile:
         path: /etc/hosts
         state: present
-        regexp: '^127.0.0.1 ubuntu'
+        regexp: '^127.0.1.1 ubuntu'
         backup: yes
-        line: '127.0.0.1  {{ set_hostname }}'
+        line: '127.0.1.1  {{ set_hostname }}'
     - name: Set Hostname to {{ set_hostname }}
       command: 'hostnamectl set-hostname "{{ set_hostname }}"'
     - name: Reboot system
