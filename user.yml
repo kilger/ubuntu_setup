@@ -32,5 +32,11 @@
         group: root
         mode: 0440
         validate: /usr/sbin/visudo -csf %s
+    - name: Set permission on {{ USER }} home folder
+      ansible.builtin.file:
+        path: /home/{{ USER }}
+        owner: {{ USER }}
+#        group: foo
+        mode: '0700'
         
 # -e USER=<user_name>
