@@ -7,8 +7,8 @@
   tasks:
 #    - debug:
 #        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
-    - name: Add {{ USER }} to admin group
-       group:
+#    - name: Add {{ USER }} to admin group
+#      group:
     - hosts: docker
       become: true
       tasks:
@@ -50,3 +50,4 @@
           service: 
             name: docker 
             state: restarted
+#5:47
