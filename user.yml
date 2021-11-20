@@ -1,0 +1,36 @@
+---
+- name: Create user {{ USER }}
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+#    - debug:
+#        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
+    - name: Add {{ USER }} to admin group
+      group:
+        name: {{ USER }}
+        state: present
+    - name: Add {{ USER }}
+      user:
+        name: {{ USER }}
+        group: admin
+        shell: /bin/bash
+        home: /home/{{ USER }}
+        create_home: yes
+        state: present
+    - name: Add SSH public key for user
+      authorized_key:
+        user: {{ USER }}
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+        state: present
+    - name: Add sudoer rule for local user
+      copy:
+        dest: /etc/sudoers.d/{{ USER }}
+        src: etc/sudoers.d/{{ USER }}
+        owner: root
+        group: root
+        mode: 0440
+        validate: /usr/sbin/visudo -csf %s
+        
+# -e USER=<user_name>
