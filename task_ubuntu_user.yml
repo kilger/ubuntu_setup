@@ -7,13 +7,13 @@
   tasks:
     - debug:
         msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
-    - name: add user ubuntu_user to /etc/sudoers
+    - name: Adding {{ ubuntu_user }} to /etc/sudoers
       lineinfile:
         path: '/etc/sudoers'
         state: present
         create: yes
         regexp: '{{ ubuntu_user }} .*'
-        line: '{{ ubuntu_user }} ALL=(ALL) NOPASSWD:ALL'
+        line: '{{ ubuntu_user }} ALL=(ALL) NOPASSWD:ALL #managed by ansible'
     
     #-e ubuntu_user 
-#3:23
+#3:34
