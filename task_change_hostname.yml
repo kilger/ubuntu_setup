@@ -1,0 +1,20 @@
+---
+- name: Change hostname with user input at runtime -e set_hostname=<new_hostname>
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Set hosts file to {{ set_hostname }}
+      lineinfile:
+        path: /etc/hosts
+        state: present
+        regexp: '^127.0.0.1 ubuntu'
+        backup: yes
+        line: '127.0.0.1  {{ set_hostname }}'
+    - name: Set Hostname to {{ set_hostname }}
+      command: 'hostnamectl set-hostname "{{ set_hostname }}"'
+    - name: Reboot system
+      command: 'reboot'
+...
+#4:13
