@@ -12,5 +12,7 @@
       apt: name=docker state=latest
     - name: install docker-compose
       apt: name=docker state=latest
+    - name: start docker service
+      systemd: name:docker state=restarted enabled=yes 
 
 #test $ docker run hello-world
