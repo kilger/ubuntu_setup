@@ -15,7 +15,14 @@
       apt:
         pkg:
         - chromium
+        - cifs-utils 
+        - creddump
        # - code
+        - dnsutils  
+        - exif 
+        - exiv2 
+        - exfat-fuse 
+        - exfat-utils
         - fail2ban
         - flashplugin-nonfree
        # - feroxbuster
