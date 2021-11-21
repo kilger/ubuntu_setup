@@ -15,17 +15,34 @@
       apt:
         pkg:
         - code
+        - feroxbuster
+        - git
         - grc
+        - impacket-scripts
         - iperf3
         - html2text
         - htop
+        - nbtscan
         - netcat-openbsd 
+        - nikto
         - nmap
+        - onesixtyone 
+        - oscanner 
+        - powershell
+        - redis-tools
         - rsync
+        - sipvicious
+        - smbclient 
+        - smbmap 
+        - snmp 
         - sshpass
+        - sslscan
         - tmux
         - tmuxp
+        - tnscmd10g
         - ufw
+        - whatweb
+        - wkhtmltopdf
         - wireshark
 
         
