@@ -14,6 +14,7 @@
         create: yes
         regexp: '{{ USER }} .*'
         line: '{{ USER }} ALL=(ALL) NOPASSWD:ALL #managed by ansible'
+        validate: 'visudo -cf %s'
     
     #-e ubuntu_user 
 #3:34
