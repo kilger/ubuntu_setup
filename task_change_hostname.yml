@@ -4,16 +4,22 @@
   connection: local
   become: true
   gather_facts: true
+  vars_prompt:
+      - name: NEW_HOSTNAME
+      - prompt: "And this beast of a machine will be called?"
+      - private: no
+  
+  
   tasks:
-    - name: Set hosts file to {{ HOSTNAME }}
+    - name: Set hosts file to {{ NEW_HOSTNAME }}
       lineinfile:
         path: /etc/hosts
         state: present
         regexp: '^127.0.1.1 ubuntu'
         backup: yes
-        line: '127.0.1.1  {{ HOSTNAME }}'
-    - name: Set Hostname to {{ HOSTNAME }}
-      command: 'hostnamectl set-hostname "{{ HOSTNAME }}"'
+        line: '127.0.1.1  {{ NEW_HOSTNAME }}'
+    - name: Set Hostname to {{ NEW_HOSTNAME }}
+      command: 'hostnamectl set-hostname "{{ NEW_HOSTNAME }}"'
     - name: Reboot system
       command: 'reboot'
 ...
