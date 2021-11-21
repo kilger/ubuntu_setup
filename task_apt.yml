@@ -17,6 +17,7 @@
         - grc
         - iperf3
         - html2text
+        - htop
         - netcat-openbsd 
         - nmap
         - rsync
