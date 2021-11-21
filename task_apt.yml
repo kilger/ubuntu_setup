@@ -23,6 +23,7 @@
         - rsync
         - tmux
         - tmuxp
+        - ufw
 
         
         
