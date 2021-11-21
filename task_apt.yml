@@ -17,7 +17,7 @@
         - apt-transport-https
         - chromium
         - cifs-utils 
-        - creddump
+       # - creddump
        # - code
         - dnsutils  
         - exif 
