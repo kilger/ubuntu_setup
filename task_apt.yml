@@ -14,11 +14,11 @@
     - name: Install a list of packages
       apt:
         pkg:
-        - code
-        - feroxbuster
+       # - code
+       # - feroxbuster
         - git
         - grc
-        - impacket-scripts
+        #- impacket-scripts
         - iperf3
         - html2text
         - htop
@@ -27,19 +27,19 @@
         - nikto
         - nmap
         - onesixtyone 
-        - oscanner 
-        - powershell
+       # - oscanner 
+       # - powershell
         - redis-tools
         - rsync
-        - sipvicious
+       # - sipvicious
         - smbclient 
         - smbmap 
         - snmp 
         - sshpass
-        - sslscan
+      #  - sslscan
         - tmux
         - tmuxp
-        - tnscmd10g
+      #  - tnscmd10g
         - ufw
         - whatweb
         - wkhtmltopdf
