@@ -1,5 +1,5 @@
 ---
-- name: Apt installs
+- name: opt installs
   hosts: localhost
   connection: local
   become: true
@@ -7,9 +7,45 @@
   tasks:
 #    - debug:
 #        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
-    - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
-      apt:
-      
+
+    - name: get ike-scan
+      git:
+        repo: https://github.com/royhills/ike-scan
+        dest: /opt/ike-scan
+        update: yes
+
+    - name: configure ike-scan
+      shell: autoreconf --install; ./configure --with-openssl
+      args:
+        chdir: /opt/ike-scan
+
+    - name: make ike-scan
+      shell: make; make install
+      args:
+        chdir: /opt/ike-scan
+
+    - name: get wpscan (requires `gem install bundler && bundle install`)
+      git:
+        repo: https://github.com/wpscanteam/wpscan
+        dest: /opt/wpscan
+        update: yes
+
+    - name: get sslscan
+      git:
+        repo: https://github.com/rbsec/sslscan
+        dest: /opt/sslscan
+        update: yes
+
+    - name: install sslscan
+      shell: make static && make install
+      args:
+        chdir: /opt/sslscan
+
+    - name: get burp
+      get_url:
+        url: https://goo.gl/NkTD9k
+        dest: /opt/burp
+        mode: 0755
 #####
 # progress
 cd /opt
