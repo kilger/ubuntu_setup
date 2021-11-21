@@ -1,0 +1,169 @@
+---
+- name: Apt installs
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+#    - debug:
+#        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
+    - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+      apt:
+      
+#####
+# progress
+cd /opt
+git clone https://github.com/Xfennec/progress
+cd progress/
+apt-get -y install libncurses5-dev
+make
+make install
+
+# John The Ripper Jumbo with Tools
+cd /opt
+git clone https://github.com/magnumripper/JohnTheRipper
+
+# LaZagne - Password recovery for Windows and Linux
+cd /opt
+git clone https://github.com/AlessandroZ/LaZagne
+LAZAGNE_CURRENT=$(curl -Is 'https://github.com/AlessandroZ/LaZagne/releases/latest' | grep -E '^Location:' | awk -F '/tag/' '{print $2}' | tr -d '\r' | tr -d '\n') 
+wget "https://github.com/AlessandroZ/LaZagne/releases/download/$LAZAGNE_CURRENT/Windows.zip"
+
+# PACK - Password Analysis and Cracking Kit
+cd /opt
+git clone https://github.com/tomato42/pack
+ln -sn /opt/pack/rulegen.py /usr/bin/pack-rulegen
+ln -sn /opt/pack/statsgen.py /usr/bin/pack-statsgen
+ln -sn /opt/pack/policygen.py /usr/bin/pack-policygen
+ln -sn /opt/pack/maskgen.py /usr/bin/pack-maskgen
+
+# xwatchwin
+cd /opt
+wget "http://www.ibiblio.org/pub/X11/contrib/utilities/xwatchwin.tar.gz"
+tar -xzvf xwatchwin.tar.gz
+rm xwatchwin.tar.gz
+cd xwatchwin
+apt-get -y install xutils-dev
+xmkmf
+make
+
+# MS15-034 Check
+mkdir /opt/ms15-034
+cd /opt/ms15-034
+ln -sn /usr/share/exploitdb/platforms/windows/dos/36773.c ms15-034.c
+gcc ms15-034.c -o ms15-034
+
+# MS14-066 Check
+mkdir /opt/ms14-066
+cd /opt/ms14-066
+curl -L "https://raw.githubusercontent.com/anexia-it/winshock-test/master/winshock_test.sh" -o "winshock_test.sh"
+cat winshock_test.sh | sed -E 's/REMOTE_VERSION=.+/REMOTE_VERSION=\$VERSION/g' | sed 's#cat <<IMP#cat <<WARN > /dev/null#g' | sed -E 's/read -p.+/REPLY=y/g' | sed 's#cat <<EOF#cat <<EOF > /dev/null#g' > winshock_test2.sh
+
+# masscan - Mass IP port scanner
+cd /opt
+git clone https://github.com/robertdavidgraham/masscan
+cd masscan/
+apt-get -y install libpcap0.8-dev
+make -j
+
+# xwd
+cd /opt
+wget "http://xorg.freedesktop.org/archive/individual/app/xwd-1.0.5.tar.bz2"
+tar -xjvf xwd-1.0.5.tar.bz2
+rm xwd-1.0.5.tar.bz2
+cd xwd-1.0.5
+apt-get install -y libx11-dev libxt-dev
+./configure ; make ; make install
+
+# TCP Ping
+cd /usr/bin
+wget "http://www.vdberg.org/~richard/tcpping"
+chmod 755 tcpping
+ln -sn /usr/bin/tcpping /usr/bin/tcping
+
+# merger.py -> nessus-merger.py
+wget "https://gist.githubusercontent.com/mastahyeti/2720173/raw" -O /tmp/merger.py
+echo \#\!/usr/bin/env python > /usr/bin/nessus-merger.py
+cat /tmp/merger.py >> /usr/bin/nessus-merger.py
+chmod 755 /usr/bin/nessus-merger.py
+rm /tmp/merger.py
+
+# VNCpwd - VNC Password Decrypter
+mkdir /opt/vncpwd
+cd /opt/vncpwd
+wget "http://aluigi.altervista.org/pwdrec/vncpwd.zip"
+unzip vncpwd.zip
+
+# PCredz - credentials/hash/credit card number sniffer
+apt-get -y remove python-pypcap && apt-get -y install python-libpcap
+cd /opt
+git clone https://github.com/lgandx/PCredz
+
+# Linux Kernel Exploit Suggester
+cd /opt
+git clone https://github.com/PenturaLabs/Linux_Exploit_Suggester
+
+# Responder
+cd /opt
+git clone https://github.com/Spiderlabs/Responder
+
+# clusterd.py
+cd /opt
+git clone https://github.com/hatRiot/clusterd.git
+
+# F5 BIG-IP Cookie decoder
+mkdir /opt/BIG-IP
+cd /opt/BIG-IP
+wget http://www.taddong.com/tools/BIG-IP_cookie_decoder.zip
+unzip BIG-IP_cookie_decoder.zip
+echo -e "#\!/bin/bash\npython /opt/BIG-IP/BIG-IP_cookie_decoder.py \$(curl -i -k \$1 2>/dev/null | grep -i \"Set-Cookie: BIGip\" | cut -d ' ' -f 2 | tr -d ';' | cut -d '=' -f 2)" > /opt/BIG-IP/big-ip-url.sh
+
+# Various extra Windows binaries
+mkdir /opt/windows-extras
+cd /opt/windows-extras
+wget http://www.tightvnc.com/download/1.3.10/tightvnc-1.3.10_x86.zip
+wget http://download.sysinternals.com/files/PSTools.zip
+wget http://download.sysinternals.com/files/AccessChk.zip
+
+# smbexec - Download only. Install is manual.
+cd /opt
+git clone https://github.com/pentestgeek/smbexec
+
+# Metasploit-Plugins from darkoperator - includes the pentest plugin
+cd /opt
+git clone https://github.com/darkoperator/Metasploit-Plugins
+#ln -sn /opt/Metasploit-Plugins/*.rb /usr/share/metasploit-framework/plugins/
+
+# Java Deserialization Exploits
+cd /opt
+git clone https://github.com/CoalfireLabs/java_deserialization_exploits
+
+# getroot.tgz from iKat
+cd /opt
+mkdir ikat
+cd ikat
+wget 'http://ikat.ha.cked.net/Linux/files/getroot.tgz'
+
+
+# ====== Clean up =============================================================
+apt-get --purge -y autoremove
+apt-get clean
+
+
+# ====== Old stuff I've disabled but am keeping around for reference ==========
+# # Setup limited user for running Firefox
+# cd /opt/pentest-scripts
+# script_name=firefox-nonroot iw_user=firefox-user program_description="Firefox (Non-Root)"  command_line="/opt/firefox/firefox" icon="/opt/firefox/browser/icons/mozicon128.png"  catagories="Network;" ./setup-x-limited.sh 
+
+# # Setup limited user for running Chromium
+# cd /opt/pentest-scripts
+# script_name=chromium-nonroot iw_user=chromium-user program_description="Chromium (Non-Root)"  command_line="/usr/bin/chromium" icon="chromium"  catagories="Network;" ./setup-x-limited.sh
+
+# # Setup limited user for running Hexchat
+# cd /opt/pentest-scripts
+# script_name=hexchat-nonroot iw_user=hexchat-user program_description="Hexchat (Non-Root)" command_line=/usr/bin/hexchat icon="hexchat" catagories="Network;" ./setup-x-limited.sh
+
+
+
+
+github
