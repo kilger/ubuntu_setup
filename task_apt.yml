@@ -14,12 +14,13 @@
     - name: Install a list of packages
       apt:
         pkg:
-        - tmux
         - iperf3
         - grc
+        - nmap
         - rsync
         - html2text
         - netcat-openbsd 
+        - tmux
         - tmuxp
 
         
