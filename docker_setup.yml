@@ -8,10 +8,24 @@
 #    - debug:
 #        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
 #    - name: Add {{ USER }} to admin group
+    - name: apt update
+      apt: update_cache=yes
+
     - name: install docker.io
-      apt: name=docker state=latest
+      apt: name=docker.io state=latest
     - name: install docker-compose
-      apt: name=docker state=latest
+      apt: name=docker-compose state=latest
+
+    - apt: name=docker-engine state=present
+    - name: add user mod
+      command: sudo usermod -aG docker {{ USER }}
+       
+      
+      
+      
+      
+      
+      
     - name: start docker service
       systemd: name:docker state=restarted enabled=yes 
 
