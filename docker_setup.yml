@@ -8,9 +8,9 @@
 #    - debug:
 #        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
 #    - name: Add {{ USER }} to admin group
-    - name: install docker
-      apt: name=docker state=latest
     - name: install docker.io
+      apt: name=docker state=latest
+    - name: install docker-compose
       apt: name=docker state=latest
 
 #test $ docker run hello-world
