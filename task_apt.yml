@@ -14,15 +14,22 @@
     - name: Install a list of packages
       apt:
         pkg:
+        - chromium
        # - code
         - fail2ban
+        - flashplugin-nonfree
        # - feroxbuster
+        - gimp
         - git
         - grc
         #- impacket-scripts
+        - icedtea-plugin
         - iperf3
         - html2text
         - htop
+        - libreoffice-calc
+        - libreoffice-gnome 
+        - libreoffice-writer 
         - nbtscan
         - netcat-openbsd 
         - nikto
@@ -45,7 +52,8 @@
         - whatweb
         - wkhtmltopdf
         - wireshark
+        - xfce4-screenshooter
 
         
-        
+
 
