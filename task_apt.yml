@@ -1,0 +1,27 @@
+---
+- name: Apt installs
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+#    - debug:
+#        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
+    - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+    - name: Install a list of packages
+      apt:
+        pkg:
+        - tmux
+        - iperf3
+        - grc
+        - rsync
+        - html2text
+        - netcat-openbsd 
+        - tmuxp
+
+        
+        
+
