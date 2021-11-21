@@ -1,0 +1,32 @@
+---
+- name: Ubuntu user
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+    - debug:
+        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
+    - name: Adding {{ USER }} to /etc/sudoers
+    
+#Allow Incoming SSH from Specific IP address or subnet
+sudo iptables -A INPUT -p tcp -s 192.168.86.0/24 --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+    - iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_port: 22
+        ctstate: NEW
+        syn: match
+        jump: ACCEPT
+        comment: Accept new SSH connections from 192.168.86.0/24
+    - iptables:
+        chain: OUTPUT
+        protocol: tcp
+        destination_port: 22
+        ctstate: NEW
+        syn: match
+        jump: ACCEPT
+        comment: Accept new SSH connections from 192.168.86.0/24
+
+    
