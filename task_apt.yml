@@ -14,6 +14,7 @@
     - name: Install a list of packages
       apt:
         pkg:
+        - apt-transport-https
         - chromium
         - cifs-utils 
         - creddump
@@ -42,7 +43,8 @@
         - netcat-openbsd 
         - nikto
         - nmap
-        - onesixtyone 
+        - onesixtyone
+        - openvpn
        # - oscanner 
         - passing-the-hash
        # - powershell
@@ -65,6 +67,8 @@
         - vncsnapshot
         - xdotool
         - xfce4-screenshooter
+        
+        
 
         
 
