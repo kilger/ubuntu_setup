@@ -37,15 +37,18 @@
         - libreoffice-calc
         - libreoffice-gnome 
         - libreoffice-writer 
+        - metagoofil 
         - nbtscan
         - netcat-openbsd 
         - nikto
         - nmap
         - onesixtyone 
        # - oscanner 
+        - passing-the-hash
        # - powershell
         - redis-tools
         - rsync
+        - sshfs
        # - sipvicious
         - smbclient 
         - smbmap 
@@ -59,6 +62,8 @@
         - whatweb
         - wkhtmltopdf
         - wireshark
+        - vncsnapshot
+        - xdotool
         - xfce4-screenshooter
 
         
