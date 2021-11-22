@@ -19,6 +19,8 @@
         - cifs-utils 
        # - creddump
        # - code        #requires repo and key be installed first
+#docker        - ca-certificates
+        - curl
         - dnsutils  
         - exif 
         - exiv2 
@@ -30,6 +32,7 @@
         - gimp
         - git-all
         - grc
+#docker        - gnupg-agent
         #- impacket-scripts
        # - icedtea-plugin
         - iperf3
@@ -56,6 +59,7 @@
         - smbclient 
         - smbmap 
         - snmp 
+#docker        - software-properties-common
         - sshpass
       #  - sslscan
         - tmux
