@@ -17,9 +17,9 @@
         state: present
         regexp: '^127.0.1.1 ubuntu'
         backup: yes
-        line: '127.0.1.1  {{ NEW_HOSTNAME }}'
+        line: '127.0.1.1  {{ NEW_HOSTNAME | default('kali')}}'
     - name: Set Hostname to {{ NEW_HOSTNAME }}
-      command: 'hostnamectl set-hostname "{{ NEW_HOSTNAME }}"'
+      command: 'hostnamectl set-hostname "{{ NEW_HOSTNAME | default('ubuntu')}}"'
     - name: Reboot system
       command: 'reboot'
 ...
