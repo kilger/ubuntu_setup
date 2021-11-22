@@ -1,0 +1,35 @@
+---
+- name: Install Docker
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  vars_prompt:
+    - name: docker_user
+    - prompt: "user adding to docker?"
+    - private: no
+    
+  tasks:
+#    - debug:
+#        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+    - name: apt update
+      apt: update_cache=yes
+
+    - name: install docker.io
+      apt: name=docker.io state=latest
+    - name: install docker-compose
+      apt: name=docker-compose state=latest
+
+#    - apt: name=docker-engine state=present
+    - name: add user mod
+      command: sudo usermod -aG docker {{ docker_user }}
+
+#    - name: start docker service
+ #       systemd: name:docker state=restarted enabled=yes
+
+    - name: Start service docker, if not started
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
