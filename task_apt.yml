@@ -31,7 +31,7 @@
         - git-all
         - grc
         #- impacket-scripts
-        - icedtea-plugin
+       # - icedtea-plugin
         - iperf3
         - html2text
         - htop
