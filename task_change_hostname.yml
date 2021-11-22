@@ -6,8 +6,8 @@
   gather_facts: true
   vars_prompt:
       - name: NEW_HOSTNAME
-      - prompt: "And this beast of a machine will be called?"
-      - private: no
+        prompt: "And this beast of a machine will be called?"
+        private: no
   
   
   tasks:
