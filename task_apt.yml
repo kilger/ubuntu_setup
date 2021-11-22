@@ -18,7 +18,7 @@
         - chromium
         - cifs-utils 
        # - creddump
-       # - code
+       # - code        #requires repo and key be installed first
         - dnsutils  
         - exif 
         - exiv2 
@@ -28,7 +28,7 @@
         - flashplugin-nonfree
        # - feroxbuster
         - gimp
-        - git
+        - git-all
         - grc
         #- impacket-scripts
         - icedtea-plugin
@@ -41,6 +41,7 @@
         - metagoofil 
         - nbtscan
         - netcat-openbsd 
+        - net-tools
         - nikto
         - nmap
         - onesixtyone
@@ -61,6 +62,7 @@
         - tmuxp
       #  - tnscmd10g
         - ufw
+        - vim
         - whatweb
         - wkhtmltopdf
         - wireshark
