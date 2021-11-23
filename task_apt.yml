@@ -38,6 +38,8 @@
         - iperf3
         - html2text
         - htop
+        - iptables
+        - iptables-persistent
         - libreoffice-calc
         - libreoffice-gnome 
         - libreoffice-writer 
@@ -45,6 +47,7 @@
         - nbtscan
         - netcat-openbsd 
         - net-tools
+        - netfilter-persistent
         - nikto
         - nmap
         - onesixtyone
