@@ -7,3 +7,15 @@
   tasks:
     - debug:
         msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
+        
+        
+ ---
+- name: starting task with prompt 
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  vars_prompt:
+    - name: docker_user
+      prompt: "user adding to docker?"
+      private: no
