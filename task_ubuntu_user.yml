@@ -1,20 +1,57 @@
 ---
-- name: Ubuntu user
+- name: add user
   hosts: localhost
   connection: local
   become: true
   gather_facts: true
+  vars_prompt:
+    - name: ubuntu_user
+      prompt: "user name?"
+      private: no
+
   tasks:
-    - debug:
-        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
-    - name: Adding {{ USER }} to /etc/sudoers
+    - name: Add the user {{ ubuntu_user }} with a bash shell
+      ansible.builtin.user:
+        name: "{{ ubuntu_user }}"
+        shell: /bin/bash
+        groups: admin,sudo
+        state: present
+        append: yes
+ #       update_password: on_create
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/id_rsa
+
+    - name: Remove no password from Admin group
       lineinfile:
-        path: '/etc/sudoers'
+        path: /etc/sudoers
+        state: present
+        regexp: '^%ADMIN ALL='
+        line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
+        validate: /usr/sbin/visudo -cf %s
+
+    - name: Set permission on home folder
+      ansible.builtin.file:
+        path: /home/{{ ubuntu_user }}
+        state: directory
+        owner: "{{ ubuntu_user }}"
+    #    group: foo
+        mode: '0700'
+
+    - name: add {{ ubuntu_user }} user to sudoers.d
+      lineinfile:
+        path: '/etc/sudoers.d/{{ ubuntu_user }}'
         state: present
         create: yes
-        regexp: '{{ USER }} .*'
-        line: '{{ USER }} ALL=(ALL) NOPASSWD:ALL #managed by ansible'
-        validate: 'visudo -cf %s'
-    
-    #-e ubuntu_user 
-#3:34
+        regexp: '{{ ubuntu_user }} .*'
+        line: '{{ ubuntu_user }} ALL=(ALL) NOPASSWD:ALL'
+
+
+#    - name: Add sudoer rule for local user
+#      copy:
+#        dest: /etc/sudoers.d/{{ ubuntu_user }}
+#        src: etc/sudoers.d/{{ ubuntu_user }}
+#        owner: root
+#        group: root
+#        mode: 0440
+#        validate: /usr/sbin/visudo -csf %s
