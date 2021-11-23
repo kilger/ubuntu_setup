@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  vars_prompt:
+    - name: ubuntu_hostname
+      prompt: "New name for this bad boy?"
+      private: no
+
+
+  tasks:
+    - name: Set hosts file to user entered value of {{ ubuntu_hostname }}
+      lineinfile:
+        path: /etc/hosts
+        state: present
+        regexp: '^127.0.1.1     ubuntu'
+        backup: yes
+        line: '127.0.1.1        {{ ubuntu_hostname }}'
+    - name: Set Hostname to user entered value
+      command: 'hostnamectl set-hostname "{{ ubuntu_hostname }}"'
+    - name: Reboot system
+      command: 'reboot'
