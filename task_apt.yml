@@ -33,6 +33,7 @@
         - fonts-noto-color-emoji
       #  - flashplugin-nonfree
        # - feroxbuster
+        - gedit
         - gimp
         - git-all
         - grc
