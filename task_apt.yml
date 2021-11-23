@@ -68,6 +68,7 @@
       #  - tnscmd10g
         - ufw
         - vim
+        - vnstat
         - whatweb
         - wkhtmltopdf
         - wireshark
