@@ -29,6 +29,8 @@
         - exfat-fuse 
         - exfat-utils
         - fail2ban
+        - fonts-firacode
+        - fonts-noto-color-emoji
       #  - flashplugin-nonfree
        # - feroxbuster
         - gimp
@@ -55,6 +57,7 @@
         - onesixtyone
         - openvpn
        # - oscanner 
+        - pandoc
         - passing-the-hash
        # - powershell
         - redis-tools
@@ -68,6 +71,9 @@
         - sshpass
       #  - sslscan
         - sudo
+        - texlive 
+        - texlive-latex-extra 
+        - texlive-fonts-extra
         - tmux
         - tmuxp
       #  - tnscmd10g
@@ -82,7 +88,7 @@
         - xfce4-screenshooter
         
         
-        
+
         
 
         
