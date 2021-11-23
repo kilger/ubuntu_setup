@@ -18,6 +18,7 @@
         - chromium
         - cifs-utils 
         - creddump
+        - cryptsetup
        # - code        #requires repo and key be installed first
 #docker        - ca-certificates
         - curl
@@ -79,6 +80,8 @@
         - vncsnapshot
         - xdotool
         - xfce4-screenshooter
+        
+        
         
         
 
