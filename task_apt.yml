@@ -63,6 +63,7 @@
         - passing-the-hash
        # - powershell
         - redis-tools
+        - rlwrap
         - rsync
         - sshfs
        # - sipvicious
