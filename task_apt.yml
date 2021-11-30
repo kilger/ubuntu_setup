@@ -62,6 +62,7 @@
         - pandoc
         - passing-the-hash
        # - powershell
+        - python3-pip
         - redis-tools
         - rlwrap
         - rsync
