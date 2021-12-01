@@ -45,6 +45,7 @@
         - htop
         - iptables
         - iptables-persistent
+        - jq
         - knockd
         - libreoffice-calc
         - libreoffice-gnome 
