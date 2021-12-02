@@ -1,0 +1,5 @@
+    - name: Creates an entry like "@reboot reboot_message.sh"
+      ansible.builtin.cron:
+        name: "message after reboot"
+        special_time: reboot
+        job: "~/scripts/reboot_message.sh"
