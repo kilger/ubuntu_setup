@@ -1,4 +1,31 @@
 ---
+- hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  vars_prompt:
+    - name: user_input
+      prompt: " Prompt text"
+      private: no
+  tasks:
+    - name: with user input { user_input }
+
+
+---
+- hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+    - name: with no user input
+
+
+
+
+
+#############older###########
+
+---
 - name: Starting task
   hosts: localhost
   connection: local
