@@ -1,0 +1,13 @@
+
+---
+- hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+    - name: nikto.pl executable
+      ansible.builtin.file:
+        path: /opt/nikto/nikto.pl
+        owner: user
+        group: user
+        mode: '0777'
