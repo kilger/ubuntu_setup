@@ -1,19 +1,24 @@
 ---
 - name: Create inputrc for reverse searching
-  hosts: localhost
+- hosts: localhost
   connection: local
   become: true
   gather_facts: true
+  vars_prompt:
+    - name: INPUTRC
+      prompt: " Add inputrc to which user?"
+      private: no
   tasks:
+    - name: with user input { INPUTRC }
 #    - debug:
 #        msg: "I am connecting to {{ ansible_nodename }} which is running {{ ansible_distribution }} {{ ansible_distribution_version }}"
-    - name: Create .inputrc for {{ USER }}
+    - name: Create .inputrc for {{ INPUTRC }}
       ansible.builtin.file:
-         path: /home/{{ USER }}/.inputrc
+         path: /home/{{ INPUTRC }}/.inputrc
          state: touch
     - name: Ansible Insert multiple lines using blockinfile
       blockinfile:
-        dest: /home/{{ USER }}/.inputrc
+        dest: /home/{{ INPUTRC }}/.inputrc
         block: |
           "\e[A": history-search-backward
           "\e[B": history-search-forward
