@@ -1,5 +1,31 @@
-    - name: Creates an entry like "@reboot reboot_message.sh"
+---
+- hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Create scripts directory if it does not exist
+      ansible.builtin.file:
+        path: /home/kali/scripts
+        state: directory
+        mode: '0755'
+  #default is root group and user, change to current user
+
+    - name: Create reboot_message file if missing
+      ansible.builtin.file:
+        path: /home/kali/scripts/reboot_message.sh
+        state: touch
+
+    - name: reboot_message.sh added
+      blockinfile:
+        dest: /home/kali/scripts/reboot_message.sh
+        block: |
+          #!/bin/sh
+          echo "Last reboot time: $(date)" > /etc/motd
+        backup: yes
+
+    - name: Creates entry "@reboot reboot_message.sh"
       ansible.builtin.cron:
         name: "message after reboot"
         special_time: reboot
-        job: "~/scripts/reboot_message.sh"
+        job: "sh /home/kali/scripts/reboot_message.sh"
