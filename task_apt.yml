@@ -14,6 +14,7 @@
     - name: Install a list of packages
       apt:
         pkg:
+        - apt-file
         - apt-transport-https
         - bleachbit
         - bum
@@ -31,15 +32,18 @@
         - exfat-fuse 
         - exfat-utils
         - fail2ban
+        - figlet
         - fonts-firacode
         - fonts-noto-color-emoji
       #  - flashplugin-nonfree
        # - feroxbuster
+        - gdebi
         - gedit
         - gimp
         - git-all
         - grc
 #docker        - gnupg-agent
+        - gnome-do
         #- impacket-scripts
        # - icedtea-plugin
         - iperf3
@@ -70,6 +74,8 @@
         - redis-tools
         - rlwrap
         - rsync
+        - scrub
+        - shutter
         - sshfs
         #- sipvicious
         - smbclient 
@@ -79,6 +85,7 @@
         - sshpass
         #- sslscan
         - sudo
+        - synaptic
         - texlive 
         - texlive-latex-extra 
         - texlive-fonts-extra
