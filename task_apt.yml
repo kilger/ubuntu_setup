@@ -85,6 +85,7 @@
         - sshpass
         #- sslscan
         - sudo
+        - syncthing
         - synaptic
         - texlive 
         - texlive-latex-extra 
