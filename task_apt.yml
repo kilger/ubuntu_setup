@@ -15,12 +15,14 @@
       apt:
         pkg:
         - apt-transport-https
+        - bleachbit
+        - bum
         - chromium
         - cifs-utils 
-#        - creddump
+        #- creddump
         - cryptsetup
-       # - code        #requires repo and key be installed first
-#docker        - ca-certificates
+        #- code        #requires repo and key be installed first
+       #docker        - ca-certificates
         - curl
         - dnsutils  
         - ecryptfs-utils
@@ -59,29 +61,30 @@
         - nmap
         - onesixtyone
         - openvpn
-       # - oscanner 
+        #- oscanner 
         - pandoc
         - passing-the-hash
-       # - powershell
+        #- powershell
+        - preload
         - python3-pip
         - redis-tools
         - rlwrap
         - rsync
         - sshfs
-       # - sipvicious
+        #- sipvicious
         - smbclient 
         - smbmap 
         - snmp 
 #docker        - software-properties-common
         - sshpass
-      #  - sslscan
+        #- sslscan
         - sudo
         - texlive 
         - texlive-latex-extra 
         - texlive-fonts-extra
         - tmux
         - tmuxp
-      #  - tnscmd10g
+        #- tnscmd10g
         - ufw
         - vim
         - vnstat
